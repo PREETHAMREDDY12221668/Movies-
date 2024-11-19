@@ -1,0 +1,66 @@
+.content-top {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.about h3 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.about-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.grid img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.desc {
+    max-width: 500px;
+    font-size: 1rem;
+}
+
+.desc p {
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+.watch_but {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff4500;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 15px;
+}
+
+.watch_but:hover {
+    background-color: #ff2c00;
+}
+
+.cast h4 {
+    margin-top: 20px;
+    font-size: 1.25rem;
+}
+
+.cast ul {
+    list-style: none;
+    padding: 0;
+}
+
+.cast li {
+    font-size: 0.95rem;
+    margin: 5px 0;
+}
+
+.clear {
+    clear: both;
+}
