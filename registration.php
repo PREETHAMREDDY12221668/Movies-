@@ -1,5 +1,5 @@
 <?php include('header.php');?>
-<link rel="stylesheet" href="validation/dist/css/bootstrapValidator.css"/>
+<link rel="stylesheet" href="css/register.css"/>
     
 <script type="text/javascript" src="validation/dist/js/bootstrapValidator.js"></script>
   <!-- =============================================== -->
@@ -8,9 +8,9 @@
     $frm=new formBuilder;      
   ?> 
 </div>
-<div class="content">
-	<div class="wrap">
-		<div class="content-top" style="min-height:300px;padding:50px">
+<div class="register-content">
+	<div class="register-wrap">
+		<div class="register-content-top" style="min-height:300px;padding:50px">
 			<div class="col-md-4 col-md-offset-4">
 				<div class="panel panel-default">
 				  <div class="panel-heading">Register</div>

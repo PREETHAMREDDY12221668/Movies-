@@ -1,41 +1,71 @@
-<div class="footer">
-	<div class="wrap">
-			<div class="footer-top">
-				<div class="col_1_of_4 span_1_of_4">
-					<div class="footer-nav">
-		                <ul>
-		                   <li><a href="index.php">Home</a></li>
-			  		   <li><a href="movies_events.php">Movies</a></li>
-			  		   <li><a href="login.php">Login</a></li>
-		                   </ul>
-		              </div>
-				</div>
-				<div class="col_1_of_4 span_1_of_4">
-					<div class="textcontact">
-						<p>Theatre Assistance<br>
-						Theatre 3D Movie<br>
-						Ph: +1-800-234-52589.<br>
-						</p>
-					</div>
-				</div>
-				<div class="col_1_of_4 span_1_of_4">
-					<div class="call_info">
-						<p class="txt_3">Call us toll free:</p>
-						<p class="txt_4">1 800 234 23456</p>
-					</div>
-				</div>
-				<div class="col_1_of_4 span_1_of_4">
-					<div class=social>
-						<a href="#"><img src="images/fb.png" alt=""/></a>
-						<a href="#"><img src="images/tw.png" alt=""/></a>
-						<a href="#"><img src="images/dribble.png" alt=""/></a>
-						<a href="#"><img src="images/pinterest.png" alt=""/></a>
-					</div>
-				</div>
-				<div class="clear"></div>
-			</div>
-		</div>
-	</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/footer.css"
+</head>
+<body>
+<div class="footer-content">
+    <div class="footer-wrap">
+        <!-- About Us Section -->
+        <div class="col_1_of_4">
+            <h3 class="h3">About Us</h3>
+            <p class="p">
+                Welcome to MovieZone, your go-to platform for booking movie tickets online. 
+                Experience the best shows and get exclusive offers with ease and convenience.
+            </p>
+            <p class="p">
+                Our mission is to make movie booking seamless and enjoyable for everyone. 
+                Join us for the latest in entertainment!
+            </p>
+        </div>
+
+        <!-- Quick Links Section -->
+        <div class="col_1_of_4">
+            <h3 class="h3">Quick Links</h3>
+            <ul class="footer-links">
+                <li><a href="index.php">Home</a></li>
+                <li><a href="movies_events.php">Movies</a></li>
+                <li><a href="offers.php">Offers</a></li>
+                <li><a href="contact_us.php">Contact Us</a></li>
+                <li><a href="login.php">Login</a></li>
+            </ul>
+        </div>
+
+        <!-- Customer Support Section -->
+        <div class="col_1_of_4">
+            <h3 class="h3">Customer Support</h3>
+            <ul class="footer-links">
+                <li><a href="faq.php">FAQs</a></li>
+                <li><a href="refund_policy.php">Refund Policy</a></li>
+                <li><a href="terms_conditions.php">Terms & Conditions</a></li>
+                <li><a href="privacy_policy.php">Privacy Policy</a></li>
+                <li><a href="support.php">Help Center</a></li>
+            </ul>
+        </div>
+
+        <!-- Newsletter Signup and Social Media -->
+        <div class="col_1_of_4">
+            <h3 class="h3">Stay Connected</h3>
+            <p class="p">Subscribe to our newsletter to get the latest updates on movies, offers, and events:</p>
+            <form id="newsletter-form">
+                <input type="email" id="newsletter-input" placeholder="Enter your email" required>
+                <button id="newsletter-button" type="submit">Subscribe</button>
+            </form>
+            <div class="social">
+                <a href="#"><img src="images/facebook.svg" alt="Facebook"></a>
+                <a href="#"><img src="images/x.svg" alt="Twitter"></a>
+                <a href="#"><img src="images/instagram.svg" alt="Instagram"></a>
+                <a href="#"><img src="images/youtube.svg" alt="YouTube"></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p class="p">&copy; 2024 Movie+. All Rights Reserved. Designed by Movie+ Team.</p>
+    </div>
+</div>
+
 </body>
 </html>
 
@@ -44,7 +74,7 @@
 	padding-bottom:0px !important;
 }
 #form111 {
-                width:500px;
+                
                 margin:50px auto;
 }
 #search111{
@@ -84,12 +114,12 @@
                 {
                 
                 $string .="'".strtoupper($ss['movie_name'])."'".",";
-                //$string=implode(',',$string);
+                
                 
               
                 }
                 ?>
-                //alert("<?php echo $string;?>");
+               
               var choices=[<?php echo $string;?>];
                 var suggestions = [];
                 for (i=0;i<choices.length;i++)

@@ -1,25 +1,19 @@
+<?php include('header.php'); ?>
+
 <?php
-include('header.php'); // Ensure header.php includes necessary HTML head elements and links to jQuery if needed
-require_once 'TMDbClient.php';
+require_once 'config.php'; // Include your database connection script
 
-$tmdb = new TMDbClient('7d6d71ee4e29b78914b65797e1bcc63c'); // Replace with your actual TMDb API key
 
-// Fetch "Now Playing" movies in India
-$moviesResponse = $tmdb->getNowPlayingMoviesInIndia(); // Use the proper method
+// Fetch movie advertisements from the database
+$query = "SELECT * FROM movie_ads"; // Adjust table/column names as needed
+$result = $con->query($query);
 
-// Check if movies were fetched successfully
-if ($moviesResponse && !empty($moviesResponse['results'])) {
-    $movies = $moviesResponse['results'];
-} else {
-    $movies = []; // Empty array if no movies fetched
-}
-
-// Fetch genre list and create a mapping
-$genresResponse = $tmdb->request('genre/movie/list', []); // Adjust parameters if needed
-$genresList = $genresResponse['genres'] ?? [];
-$genreMap = [];
-foreach ($genresList as $genre) {
-    $genreMap[$genre['id']] = $genre['name'];
+// Store the data in an array
+$ads = [];
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $ads[] = $row;
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -28,67 +22,41 @@ foreach ($genresList as $genre) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie +</title>
-    <link rel="stylesheet" href="mainstyles.css"> <!-- Ensure this is the path to your CSS file -->
-    <style>
-        /* Include the revised CSS here or keep it in mainstyles.css */
-    </style>
+    <link rel="stylesheet" href="mainstyles.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <div class="background-gradient">
     <div class="slider">
-        <?php if (!empty($movies)): ?>
-            <?php foreach ($movies as $movie): ?>
-                <?php
-                    $movieDetails = $tmdb->getMovieDetails($movie['id']); // Fetch detailed info
-                    if ($movieDetails) {
-                        $movie = array_merge($movie, $movieDetails);
-                    }
-                    // Map genre IDs to names
-                    $movieGenres = [];
-                    if (isset($movie['genre_ids']) && is_array($movie['genre_ids'])) {
-                        foreach ($movie['genre_ids'] as $genreId) {
-                            $movieGenres[] = htmlspecialchars($genreMap[$genreId] ?? 'Unknown');
-                        }
-                    }
-                ?>
-                <section class="slide movie-section">
-                    <?php
-                        $backdropPath = $movie['backdrop_path'] ?? 'joker.jpg';
-                    ?>
-                    <div class="movie-image" style="background-image: url('https://image.tmdb.org/t/p/original<?= htmlspecialchars($backdropPath) ?>');">
+        <?php if (!empty($ads)): ?>
+            <?php foreach ($ads as $ad): ?>
+                <div class="slide movie-section">
+                    <div class="movie-image" style="background-image:linear-gradient(90deg, rgb(26, 26, 26) 24.97%, rgb(26, 26, 26) 38.3%, rgba(26, 26, 26, 0.04) 97.47%, rgb(26, 26, 26) 100%), url('<?= htmlspecialchars($ad['image_path']) ?>'); background-reapet:no-reapet">
                         <div class="gradient-overlay"></div>
                         <div class="movie-info">
                             <div class="tags">
-                                <?php foreach ($movieGenres as $genre): ?>
-                                    <span class="tag"><?= $genre ?></span>
-                                <?php endforeach; ?>
-                                <span class="rating"><?= htmlspecialchars($movie['vote_average'] ?? 'N/A') ?>/10</span>
+                                <span class="tag"><?= htmlspecialchars($ad['genre']) ?></span>
+                                <span class="rating"><?= htmlspecialchars($ad['rating']) ?>/10</span>
                             </div>
-                            <h1 class="movie-title"><?= htmlspecialchars($movie['title'] ?? 'No Title') ?></h1>
-                            <p class="movie-description"><?= htmlspecialchars($movie['overview'] ?? 'No Description Available.') ?></p>
-                            <p class="movie-duration"><?= htmlspecialchars($movie['runtime'] ?? 'N/A') ?> min</p>
+                            <h1 class="movie-title"><?= htmlspecialchars($ad['title']) ?></h1>
+                            <p class="movie-description"><?= htmlspecialchars($ad['description']) ?></p>
+                            <p class="movie-duration"><?= htmlspecialchars($ad['duration']) ?> min</p>
                             <a href="#" class="btn-buy-tickets">Buy Tickets</a>
                         </div>
                     </div>
-                </section>
+                </div>
             <?php endforeach; ?>
         <?php else: ?>
-            <section class="slide movie-section">
-                <div class="movie-image" style="background-image: url('joker.jpg');">
+            <div class="slide movie-section">
+                <div class="movie-image" style="background-image: url('default-ad.jpg');">
                     <div class="gradient-overlay"></div>
                     <div class="movie-info">
-                        <div class="tags">
-                            <span class="tag">Drama</span>
-                            <span class="rating">4.5/10</span>
-                        </div>
-                        <h1 class="movie-title">Joker</h1>
-                        <p class="movie-description">A beggar's life takes an unexpected turn when a misadventure upends his daily routine...</p>
-                        <p class="movie-duration">122 min</p>
-                        <a href="#" class="btn-buy-tickets">Buy Tickets</a>
+                        <h1 class="movie-title">No Advertisements Available</h1>
+                        <p class="movie-description">Please check back later for updates.</p>
                     </div>
                 </div>
-            </section>
+            </div>
         <?php endif; ?>
     </div>
 
@@ -99,24 +67,11 @@ foreach ($genresList as $genre) {
     </div>
 </div>
 
-
-<?php include('footer.php'); ?>
-<?php include('searchbar.php'); ?>
-
 <script>
-    // JavaScript for slider functionality with Autoplay
     document.addEventListener('DOMContentLoaded', function() {
         let currentIndex = 0;
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
-        const intervalTime = 5000; // 5 seconds
-        let slideInterval;
-
-        window.moveSlide = function(direction) {
-            currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
-            showSlide(currentIndex);
-            resetInterval();
-        };
 
         function showSlide(index) {
             slides.forEach((slide, i) => {
@@ -124,53 +79,25 @@ foreach ($genresList as $genre) {
             });
         }
 
-        function startAutoplay() {
-            slideInterval = setInterval(() => {
-                moveSlide(2);
-            }, intervalTime);
+        function moveSlide(direction) {
+            currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
+            showSlide(currentIndex);
         }
 
-        function resetInterval() {
-            clearInterval(slideInterval);
-            startAutoplay();
-        }
+        // Autoplay
+        let autoplay = setInterval(() => moveSlide(1), 5000);
 
-        // Lazy load images
-        function lazyLoadImages() {
-            slides.forEach(slide => {
-                const movieImage = slide.querySelector('.movie-image');
-                const backgroundImage = movieImage.style.backgroundImage;
-
-                // Check if the slide is in view
-                const observer = new IntersectionObserver(entries => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            // Load the actual image
-                            movieImage.style.backgroundImage = backgroundImage;
-                            observer.unobserve(slide); // Stop observing after loading
-                        }
-                    });
-                });
-
-                observer.observe(slide);
-            });
-        }
-
-        // Initialize the slider
-        showSlide(currentIndex);
-        startAutoplay();
-        lazyLoadImages(); // Call lazy loading
-
-        // Pause on hover
         document.querySelector('.slider').addEventListener('mouseenter', () => {
-            clearInterval(slideInterval);
+            clearInterval(autoplay);
         });
 
         document.querySelector('.slider').addEventListener('mouseleave', () => {
-            startAutoplay();
+            autoplay = setInterval(() => moveSlide(1), 5000);
         });
+
+        showSlide(currentIndex);
     });
 </script>
-
+<?php include('movies_events.php') ?>
 </body>
 </html>

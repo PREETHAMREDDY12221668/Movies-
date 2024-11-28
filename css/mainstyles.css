@@ -1,0 +1,203 @@
+
+
+
+
+
+.background-gradient {
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+}
+
+.slider {
+    position: relative;
+    width: 100%; /* Adjust width as needed */
+    height: 60vh;  /* Adjust height as needed */
+    overflow: hidden;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60vh;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide.active {
+    transform: translateX(0); /* Make the active slide visible */
+}
+
+.slide:not(.active) {
+    transform: translateX(100%);  /* Hide inactive slides */
+}
+
+.movie-image {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    background-size: cover;
+    background-position: center;
+}
+.gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60vh;
+    background: linear-gradient(to bottom, rgba(0, 0,  0, 0.5), rgba(0, 0, 0, 1));
+    z-index: 1;
+}
+
+.movie-info {
+    position: absolute;
+    z-index: 2;
+    color: white;
+    padding: 20px;
+    bottom: 20px; /* Positioning at the bottom */
+}
+
+.movie-title {
+    font-size: 2.5em; /* Adjust size as needed */
+    margin-bottom: 10px;
+}
+
+.tags {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tag, .rating {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+
+.navigation {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    z-index: 3;
+}
+
+.navigation button {
+    background: rgba(0, 0, 0, 0.5);
+    color: #0F0F0F;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.navigation button:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.rating {
+    color: #ff483b;
+}
+
+.movie-title {
+    font-size: 3.5em;
+    font-weight: 300;
+    margin: 0.5em 0;
+}
+
+.movie-description {
+    font-size: 1em;
+    margin: 1em 0;
+    line-height: 1.6;
+    font-weight: 100;
+    color: #F3F3F3;
+}
+
+.movie-duration {
+    font-size: 1em;
+    border: #a0a0a0 0.5px solid;
+    border-radius: 2px;
+    width: 70px;
+    text-align: center;
+    font-weight: 100;
+    margin-top: 15px;
+}
+
+.btn-buy-tickets {
+    padding: 10px 20px;
+    background-color: #ff483b; /* Button color */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-buy-tickets:hover {
+    background-color: #e63946; /* Hover color */
+}
+
+
+/* Responsive Adjustments */
+@media screen and (max-width: 1024px) {
+    .movie-info {
+        width: 50%;
+        margin-left: 2em;
+    }
+
+    .movie-title {
+        font-size: 2.5em;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .movie-info {
+        width: 70%;
+        margin-left: 1em;
+        margin-top: 10em;
+    }
+
+    .movie-title {
+        font-size: 2em;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        background-color: #1f1f1f;
+        position: absolute;
+        top: 60px; /* Adjust based on navbar height */
+        right: 0;
+        width: 200px;
+        display: none;
+    }
+
+    .nav-links li {
+        margin: 1em 0;
+    }
+
+    .navbar .menu-toggle {
+        display: block;
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .movie-info {
+        width: 90%;
+        margin-left: 0.5em;
+        margin-top: 8em;
+    }
+
+    .movie-title {
+        font-size: 1.8em;
+    }
+
+    .btn-buy-tickets {
+        padding: 0.6em 1.5em;
+    }
+}

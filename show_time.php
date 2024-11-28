@@ -159,19 +159,19 @@
     // Fetch movie details along with screen and booking information
     $sql = "
         SELECT 
-            tbl_movie.movie_name,
-            tbl_screens.screen_name,
-            tbl_screens.seats AS screen_seats,
-            tbl_screens.charge AS ticket_price,
-            tbl_bookings.no_seats AS booked_seats,
-            tbl_bookings.date AS booking_date,
-            tbl_movie.image,
-            tbl_movie.release_date
-        FROM tbl_movie
-        LEFT JOIN tbl_screens ON tbl_movie.t_id = tbl_screens.t_id
-        LEFT JOIN tbl_bookings ON tbl_screens.screen_id = tbl_bookings.screen_id
-        WHERE tbl_movie.status = 0
-        ORDER BY tbl_movie.release_date DESC
+            movie.movie_name,
+            screens.screen_name,
+            screens.seats AS screen_seats,
+            screens.charge AS ticket_price,
+            bookings.no_seats AS booked_seats,
+            bookings.date AS booking_date,
+            movie.image,
+            movie.release_date
+        FROM movie
+        LEFT JOIN screens ON movie.t_id = screens.t_id
+        LEFT JOIN bookings ON screens.screen_id = bookings.screen_id
+        WHERE movie.status = 0
+        ORDER BY movie.release_date DESC
     ";
 
     $result = $conn->query($sql);
@@ -258,7 +258,7 @@
         .container {
             width: 100%;
             margin: 20px auto;
-            padding: 20px;
+            padding: 20px;  
             background-color: #ffffff;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -426,17 +426,17 @@
     // Fetch theater details along with showtimes for the movie
     $sql = "
     SELECT 
-        tbl_screens.screen_name,
-        tbl_screens.seats AS screen_seats,
-        tbl_screens.charge AS ticket_price,
-        tbl_bookings.no_seats AS booked_seats,
-        tbl_bookings.date AS booking_date,
-        tbl_shows.start_date
-    FROM tbl_screens
-    LEFT JOIN tbl_bookings ON tbl_screens.screen_id = tbl_bookings.screen_id
-    LEFT JOIN tbl_shows ON tbl_screens.screen_id = tbl_shows.s_id
+        screens.screen_name,
+        screens.seats AS screen_seats,
+        screens.charge AS ticket_price,
+        bookings.no_seats AS booked_seats,
+        bookings.date AS booking_date,
+        shows.start_date
+    FROM screens
+    LEFT JOIN bookings ON screens.screen_id = bookings.screen_id
+    LEFT JOIN shows ON screens.screen_id = shows.s_id
    
-    ORDER BY tbl_screens.screen_id
+    ORDER BY screens.screen_id
     ";
 
     $result = $conn->query($sql);
@@ -459,7 +459,7 @@
             // Screen information
             echo "<div class='screen-name'>Screen: " . htmlspecialchars($row["screen_name"]) . "</div>";
             
-            // Showtimes (fetched from tbl_shows)
+            // Showtimes (fetched from shows)
             echo "<div class='showtimes'>";
             $showtimes = explode(',', $row["showtime"]); // Assuming showtimes are stored as a comma-separated string
             foreach ($showtimes as $time) {

@@ -230,5 +230,5 @@ class formBuilder
         $this->validators="";//clearing for nexe form in same page
     }
     
-}
+}   
 ?>

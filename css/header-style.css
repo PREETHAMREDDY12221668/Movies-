@@ -1,73 +1,197 @@
-/* General Styles */
-
-
-/* Header Styles */
-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 15px 20px; /* Adjust padding as needed */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-   
+@font-face {
+  font-family: 'MonaSans'; /* Name for the font */
+  src: url('/fonts/Mona Sans/MonaSansExpanded-Medium.ttf') format('truetype');
+  font-weight: normal;
+font-style: normal;
+}
+@font-face {
+  font-family: 'MonaSans-medium'; /* Name for the font */
+  src: url('/fonts/Mona Sans/MonaSans-Medium.ttf') format('truetype');
+  font-weight: normal;
+font-style: normal;
 }
 
+.header {
+  background-color: #040404; /* Black background */
+  padding: 20px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 1.250em;
+  font-family: 'MonaSans';
+}
 
+.logo a{
+  font-size: 36px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #FFFFFF;
+  line-height: 1.250em;
+}
+
+.logo img {
+  width: 36px;
+  margin-right: 10px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
 
 .nav-links {
-    
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex; 
-    justify-content: space-between;
-    align-items: center;
-    justify-content: center;
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  grid-column-gap: var(--globals--gaps--gap-medium);
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  
 }
 
 .nav-links li {
-    margin-right: 20px; 
+  margin: 0 15px;
 }
 
-.nav-links a {
-    text-decoration: none;
-    color: #282c34;
+.nav-links li a {
+  font-size: 16px;
+  font-weight: 500;
+  color: #F3F3F3;
+  text-transform: uppercase; /* Added uppercase style */
+  font-family: 'MonaSans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
 }
 
-.nav-links a:hover {
-     color: #282c34;
+
+.profile-icon {
+  display: flex;
+  align-items: center;
+  color: #F3F3F3;
 }
-/* Search Bar Styles */
+
+.profile-icon img {
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
+}
+
+.profile-icon p {
+  font-size: 18px;
+}
+
+.block {
+  text-align: center;
+  background-color: #040404;
+  border-radius: 15px;
+  width: 100px;
+  align-items: center;
+}
+
+.wrap {
+  display: inline-block;
+}
+
 #reservation-form {
-    display: flex;
-    width: 100%; /* Adjust width if desired */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.field {
+  display: flex;
 }
 
 #search111 {
-    padding: 8px 12px;
-    border: 1px solid #ddd; /* Light gray border */
-    border-radius: 4px; /* Rounded corners */
-    width: 100%; /* Adjust width if desired */
+  color: #F3F3F3;
+  border: 1px solid #040404;
+  border-radius: 30px;
+  padding: 10px 15px;
+  background-color: #383838;
+  font-size: 8px;
+  width: 180px;
+  font-family: 'MonaSans-medium';
+  
 }
 
-#button111 {
-    background-color: #282c34; /* Dark blue button color */
-    color: #fff; /* White button text */
-    border: none;
-    padding: 8px 12px;
+
+
+
+/* Clear Fix */
+.clear {
+  clear: both;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #040404;
+    min-width: 150px;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.dropdown-menu a {
+    color: #F3F3F3;
+    text-decoration: none;
+    display: block;
+    padding: 10px 20px;
+    
+}
+
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-toggle {
+    color: F3F3F3;
     cursor: pointer;
-    border-radius: 4px; /* Rounded corners */
-}
-
-#button111:hover {
-    background-color: #191e22; /* Darker blue hover effect */
-}
-
-
-
-.movie-card {
-    /* Style your movie cards */
-    background-color: #333; /* Consider slightly darker background for cards */
     padding: 10px;
-    margin: 15px;
+    background-color: #040404;
+    border: none;
+    font-size: 18px;
+    border-radius: 5px;
+    
+}
+
+.profile-icon {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.profile-icon img {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .nav-links {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .nav-links li {
+      margin: 10px 0;
+  }
 }

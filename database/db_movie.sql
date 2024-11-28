@@ -321,3 +321,18 @@ INSERT INTO `tbl_theatre` (`id`, `name`, `address`, `place`, `state`, `pin`) VAL
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+CREATE TABLE movie_ads (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    genre VARCHAR(255),
+    rating DECIMAL(3, 1),
+    duration INT,
+    image_path VARCHAR(255) NOT NULL
+);
+
+INSERT INTO movie_ads (title, description, genre, rating, duration, image_path) 
+VALUES 
+('Avatar 2', 'An epic adventure to Pandora.', 'Sci-Fi', 8.5, 180, 'images/avatar2.jpg'),
+('Black Panther', 'The King of Wakanda returns.', 'Action', 9.0, 135, 'images/black_panther.jpg');

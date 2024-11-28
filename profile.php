@@ -22,7 +22,7 @@ if(!isset($_SESSION['user']))
 						<thead>
 						<th>Booking Id</th>
 						<th>Movie</th>
-						<th>Theatre</th>
+						<th>Theater</th>
 						<th>Screen</th>
 						<th>Show</th>
 						<th>Seats</th>
